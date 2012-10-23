@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Basic Overlay</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Oswald:400,700' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="css/bootstrap.min.css" >    
+      <link rel="stylesheet" href="css/prism.css" >      
+      <link rel="stylesheet" href="css/basicoverlay.css" >    
+      <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->   
+   </head>
+   <body data-spy="scroll" data-target=".navbar">
+      <div class="container">
+         <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+               <div class="container">
+                  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                  </button>                  
+                  <a class="brand tit" href="./index.html">BasicOverlay</a>
+                  <div class="nav-collapse collapse">
+                     <ul class="nav">                       
+                        <li class=""><a href="#overview">Overview</a></li>
+                        <li class=""><a href="#gs">Getting started</a></li>
+                        <li class=""><a href="#bu">Basic Usage</a></li>
+                        <li class=""><a href="#conf">Configuration</a></li>
+                        <li class=""><a href="#au">Advanced Usage</a></li>                        
+                        <li class=""><a href="#dwl">Examples &amp; Download</a></li>              
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div> 
+         <div class="row-fluid">
+            <div class="span12">          
+               <h1 class="tit" id="overview">Basic Overlay</h1>
+               <!-- OVERVIEW ============================================= -->  
+               <h3>Basic overlay is a small, developer-friendly jquery plugin focused on showing<br />overlay/modal windows in web and mobile pages.</h3>               
+               <h4>It doesn't make any assumption on style and layout, leaving designers and developers maximum creative freedom.</h4>
+               <ul id="features">
+                  <li><strong>Simple and lightweight</strong> (3.0kb minified). Works with jQuery 1.7+</li>
+                  <li><strong>Designer Friendly</strong>: doesn't come with a default style. Just code what you need!</li>
+                  <li><strong>Developer Friendly</strong>: support remote loaded content via ajax and several event hooks and callbacks</li>
+                  <li>Can be customized <strong>globally</strong> or <strong>per call</strong></li>
+                  <li>Works on modern and not so modern browsers on <strong>web</strong> and <strong>mobile</strong> (Chrome, Firefox, Opera, Safari, IE7 and up)</li>
+                  <li><strong>MIT Licensed</strong></li>
+               </ul>                   
+               <!-- GETTING STARTED ============================================= -->      
+               <h3 id="gs" class="sectionTit">Getting Started</h3>
+               <ol>
+                  <li><p><a href="#dwl">Download</a> the script and add the developer or minified version to your page after the jQuery script.</p>
+               <pre><code class="language-javascript">&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src="path/to/jq.basicOverlay.js"&gt;&lt;/script&gt;</code></pre></li>
+                  <li><p>Code and style the content to show in page or in an external file as you normally would (and - usually-  hide it via css <code>display:none</code>). No additional css or html is required.</p></li>
+                  <li>Done!</li>
+               </ol>
+            </div>
+         </div>
+         <div class="row-fluid">            
+            <div class="span8">
+               <!-- BASIC ============================================= --> 
+               <h3 id="bu" class="sectionTit">Basic Usage</h3>
+               <p>The simplest way to open a modal <strong>on click</strong> is to call the <code>basicOverlay</code> method on a jquery object:<br />
+                  <pre><code class="language-javascript">//load the default #modal content by clicking on any element with class openModal
+$('.openModal').basicOverlay(); </code></pre>
+               </p>
+               <p>The plugin will look in the current document for a DOM element with id <code>#modal</code> and opens it in the middle of the page with a simple fade in effect. The content is usually hidden and styled via css by the developer/designer. No basic style is provided, so the look and feel can be customized without overwriting unused css selectors.</p>
+               <p>Modals can be closed by clicking outside the modal window, by pressing ESC key or by adding an element with class <code>.overlay-close</code> inside you modal content. Additional customization is available via <a href="#conf">configuration object</a>.</p>
+               <p>The content to be shown in the modal window can be specified in various ways: via element attributes <code>href</code> or <code>data-overlay-modal</code> or passing a <a href="#conf">configuration object</a> as argument of the function with property <code>content</code>.</p>  
+               <p>Additionally, it is possible to load external content asynchronously via a jquery ajax request. Just specify a remote page (on the same domain, due to browser security restrictions for cross-domain asynchronously requests) and optionally the id of the DOM element to get. The external page can be set via <code>href</code> attribute on a link or via <a href="#conf">configuration object</a> with property <code>externalPage</code>.</p>    
+               <p>The overlay preserves all styles and scripts found in the target page, so it's possible to show forms, carousels etc. without additional configuration other than that found in the remote document.</p>     
+               
+               <ul class="nav nav-tabs">
+                 <li class="active"><a href="#local" data-toggle="tab">Local</a></li>
+                 <li><a href="#remote" data-toggle="tab">Remote</a></li>                                
+               </ul>  
+               <div class="tab-content">
+                  <div class="tab-pane active" id="local">
+                     <pre><code class="language-javascript">// html
+&lt;button id=&quot;btn1&quot;&gt;Click!&lt;/button&gt;
+&lt;a href=&quot;#myCustomModal&quot; class=&quot;customLink&quot;&gt;Open Me&lt;/a&gt;
+&lt;a href=&quot;#&quot; data-overlay-modal=&quot;#anotherModal&quot; class=&quot;customLink&quot;&gt;Open Me&lt;/a&gt;
+&lt;a href=&quot;#myModal&quot; class=&quot;customConfig&quot;&gt;Open Me&lt;/a&gt;
+// ...
+
+// javascript
+// open the default content #modal
+$('#btn1').basicOverlay();
+// open #myCustomModal (via href) on the first link, #anotherModal (via data-overlay) on the second one
+$('.customLink').basicOverlay();
+// open the content specified in config object (overrides html configuration)
+$('.customConfig').basicOverlay({content:'#custom'});
+</code></pre>
+                  </div>
+                  <div class="tab-pane" id="remote">
+                     <pre><code class="language-javascript">// html
+&lt;a href=&quot;external.html&quot; class=&quot;ext&quot;&gt;Click&lt;/a&gt; 
+&lt;a href=&quot;external.html&quot; class=&quot;ext&quot; data-overlay-modal=&quot;#newModal&quot;&gt;Click&lt;/a&gt; 
+&lt;a href=&quot;external.html&quot; class=&quot;ext2&quot; data-overlay-modal=&quot;#notShown&quot;&gt;Click&lt;/a&gt; 
+// ...
+
+// javascript
+// open the default content #modal found in external.html on the first link, 
+// #newModal (via data-overlay) on the second one
+$('.ext').basicOverlay(); 
+// open #showMe found in page2.html, as specified in config object 
+// overriding href and data-overlay html configuration
+$('.ext2').basicOverlay({
+   content:'#showMe',
+   externalPage: 'page2.html'
+});      
+</code></pre>
+                  </div>
+               </div>
+<!-- CONFIG ============================================= --> 
+               <h3 id="conf" class="sectionTit">Configuration</h3>
+               <p>The overlay can be easily styled and configured via a configuration object, that can be passed to a single instance, or globally for all instances in a page via <code>basicOverlay.config</code> property.</p>
+               <pre><code class="language-javascript">// default configuration object
+{  
+   content:'#modal', 
+   externalPage:'', 
+   overlayId: 'basicOverlay', 
+   overlayColor: '#000000', 
+   overlayOpacity: 0.5,    
+   closable: true,   
+   before: null,
+   after:null,
+   onClose:null,
+   afterClose: null
+};
+
+// override global configuration
+basicOverlay.config={
+   overlayColor: '#fff', 
+   content: '#myCustomContent'
+}</code></pre>
+               <table class="table table-condensed table-striped table-bordered">
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Default Value</th>   
+                     <th>Arguments</th>
+                     <th>Description</th>   
+                  </tr>
+                  <tr>
+                     <td>content</td>   
+                     <td>STRING</td>
+                     <td>'#modal'</td>
+                     <td></td>
+                     <td>DOM element to open in overlay as a CSS Selector</td>
+                  </tr>
+                  <tr>
+                     <td>externalPage</td>
+                     <td>STRING</td>
+                     <td>''</td>
+                     <td></td>
+                     <td>URL to an external page on the same domain. If found, it loads DOM element specified by content.</td>
+                  </tr>
+                  <tr>
+                     <td>overlayId</td>
+                     <td>STRING</td>
+                     <td>'basicOverlay'</td>
+                     <td></td>
+                     <td>Id of the global container added to the page by the plugin. Useful for additional styling.</td>
+                  </tr>
+                  <tr>
+                     <td>overlayColor</td>
+                     <td>STRING</td>
+                     <td>'#000000'</td>
+                     <td></td>
+                     <td>Overlay background color in hexadecimal value</td>
+                  </tr>
+                  <tr>
+                     <td>overlayOpacity</td>
+                     <td>NUMBER</td>
+                     <td>0.5</td>
+                     <td></td>
+                     <td>Opacity value of overlay background (0 => full transparent - 1 => full opaque)</td>
+                  </tr>
+                  <tr>
+                     <td>closable</td>
+                     <td>BOOLEAN</td>
+                     <td>true</td>
+                     <td></td>
+                     <td>Set true to close the modal by clicking on overlay, pressing ESC key or via close button. By setting this to false the modal can only be closed via basicOverlay.close() method, or by providing an .overlay-close button.</td>
+                  </tr>
+                  <tr>
+                     <td>before</td>
+                     <td>FUNCTION</td>
+                     <td>null</td>
+                     <td>element,<br />callback</td>
+                     <td>Function to execute before showing the modal window. Useful for additional styling, animations or configuration. Exposes two argument, the jQuery object of the modal content and a callback function (REQUIRED) that needs to be invoked to complete the opening animation</td>
+                  </tr>
+                  <tr>
+                     <td>after</td>
+                     <td>FUNCTION</td>
+                     <td>null</td>
+                     <td>element</td>
+                     <td>Function to execute after showing the modal window. Useful for DOM manipulation or script initialization. Exposes the jQuery object of the modal content</td>
+                  </tr>
+                  <tr>
+                     <td>onClose</td>
+                     <td>FUNCTION</td>
+                     <td>null</td>
+                     <td>element,<br />callback</td>
+                     <td>Callback to execute just before the modal window being closed. Useful for closing animations. Exposes two argument, the jQuery object of the modal content and a callback function (REQUIRED) that needs to be invoked to complete the closing animation</td>
+                  </tr>
+                  <tr>
+                     <td>afterClose</td>
+                     <td>FUNCTION</td>
+                     <td>null</td>
+                     <td></td>
+                     <td>Callback to execute after the modal window disappears and the added elements are removed from page</td>
+                  </tr>
+               </table>                  
+               <!-- ADVANCED ============================================= --> 
+               <h3 id="au" class="sectionTit">Advanced Usage</h3>
+               <p>Is it possible to interact with modals progammaticaly via a standalone <code>basicOverlay</code> function object. This object has two methods, <code>basicOverlay.open()</code> and <code>basicOverlay.close()</code> to open and close the current modal content.</p>
+               <p>The <code>open()</code> method accepts a <a href="#conf">configuration object</a>.</p> 
+               <pre><code class="language-javascript">// programmatically open a modal overlay
+$('#element').click(function(){      
+   basicOverlay.open({
+      opacity:0,
+      closable: false
+   });
+   return false;
+});
+// programmatically close the current overlay    
+$('#whatever-button').on('click', function(){
+   basicOverlay.close();
+   return false;
+});
+// open modal on DOM Loaded
+$(function(){
+   basicOverlay.open();
+});     
+</code></pre>
+               <p>Three callback hooks (<code>before, after, onClose</code>) return a reference to the current modal content element, so that it can be easily manipulated.</p>
+               <p>Additionally, <code>before</code> and <code>onClose</code> return a reference to the opening and closing function respectively, to be called to complete the opening and closing process (this is particulary useful to be used as a callback function after a custom animation ends).</p>
+               <pre><code class="language-javascript">basicOverlay.open({
+   before: function(el, continue){
+      var pos = el.position();  
+      // initialize some custom opening animation   
+      el.css({'top':(pos.top + 50)+'px', 'opacity':0});    
+      // call the 2nd argument as a callback at the and of animation
+      el.animate({'top':pos.top, 'opacity': 1}, continue);
+      },   
+   after: function(el){  
+      // do something when the animation is fully completed... 
+   },
+   onClose: function(el, doClose){
+      // set up a closing animation
+      var pos = el.position();
+      // call the 2nd argument as a callback at the and of animation
+      el.animate({'top':(pos.top + 150)+'px', 'opacity': 0}, doClose);
+   },
+   afterClose: function(){
+      // the modal doesn't exist anymore, so there's no reference nor callback
+      alert('I\'m done. Thank you!');
+   }   	   		      
+});</code></pre>               
+            </div>
+            <div class="span4">
+               <div data-spy="affix" data-offset-top="620">
+                  <h3>Examples</h3>
+                  <ul id="examples">
+                     <li><a href="" id="example1" rel="#script1">Basic Usage</a></li>
+                     <li><a href="" id="example2" rel="#script2">External Page with white background</a></li>
+                     <li><a href="" id="example3" rel="#script3">Complete Example with hooks</a></li>
+                     <li><a href="" id="example4" rel="#script4">Image example with animations</a></li>
+                  </ul>  
+                  <h3>Download</h3>
+                  <p>BasicOverlay can be downloaded here <br />
+                  <a href="download/jq.basicOverlay 0.8.zip">jq.basicOverlay 0.8.zip</a><br />
+                  or forked on github<br />
+                  <a href="#">http://gbuonc.github.com/basicOverlay</a>
+                  </p>
+                  <p><a href="http://copyfree.org/licenses/mit/license.txt" target="_blank">MIT licensed</a>.</p>         
+               </div>
+            </div>
+         </div>  
+         <hr>
+         <footer>
+            <p>&copy; Gianluca Buoncompagni 2012 - gianlucabuoncompagni.net</p>
+         </footer>
+      </div>  
+      <!-- 같같같같같같같같같같같같같같같같같같같같같같같같같같같같� -->
+      <div id="modal" class="basicStyle">
+            <strong>Great! This is your default overlay</strong>.<br />
+            The content of this window is taken from a hidden div with the default id "modal".<br />
+            The styling is custom-made via css. There's no default style.<br />
+            You can close this window by clicking outside it, by pressing ESC key or by clicking the little '&times;' button up there (just add a 'overlay-close' class to any item to make it close window on click).
+            <span class="overlay-close button">&times;</span>
+         </div>
+         <div id="callback" style="color: #fff">
+            <strong>This is just an ugly way to show you the custom callbacks</strong>.<br />
+            Oh Look, I don't have any style... Please, close me.
+         </div>
+         <div id="complete" class="basicStyle">
+            <strong>This is a more comprehensive example</strong> with custom animation and some additional styling.<br /> 
+            CSS3 animations by Dan Eden: <a href="http://daneden.me/animate/" target="_blank">http://daneden.me/animate/</a><br />
+            The only way to close me is to <span class="overlay-close" style="text-decoration:underline; cursor: pointer">click here</span>.       
+         </div>
+         <div id="image">
+            <img src="img/example.png" width="250" height="250" alt="!">
+         </div>
+         <a href="https://github.com/you"><img style="position: fixed; top: 30px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+
+      <div id="dwl"></div>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>	
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/prism.js"></script>      
+      <script src="js/jq.basicOverlay.min.js"></script>   
+      <script>
+         $(function(){  
+            $('#examples').popover({
+               selector :'a',
+               trigger: 'hover',
+               placement: 'bottom',
+               content: function(){
+                  var target = $(this).attr('rel');
+                  var code = '<pre><code>';
+                  code += $(target).html();
+                  code += '</code></pre>';
+                  return code;
+               }               
+            })
+         });
+      </script>
+      <script id="script1">$('#example1').basicOverlay();</script>
+      <script id="script2">$('#example2').basicOverlay({
+content: '#remote',
+externalPage: 'external.html',
+overlayColor: '#ffffff',
+overlayOpacity: 0.8
+});
+</script>
+<script id="script3">$('#example3').basicOverlay({
+content:'#complete', 
+closable:false,   		
+before: function(el, callback){
+   var pos = el.position();  
+   el.css({'top':(pos.top + 50)+'px', 'opacity':0});
+   alert('I\'m about to open an overlay with some fancy animations!'); 
+   el.animate({'top':pos.top, 'opacity': 1}, callback).addClass('animated flipInX');
+   },   
+after: function(){  
+   setTimeout(function(){
+      alert('I\'m open!');
+   }, 1000);   
+},
+onClose: function(el, doClose){
+   alert('About to close window...'); 
+   var pos = el.position();
+   el.removeClass('flipInX').animate({'top':(pos.top + 150)+'px', 'opacity': 0}, doClose);
+},
+afterClose: function(){
+   alert('I\'m done. Thank you!');
+}   	   		      
+});</script>
+   <script id="script4">$('#example4').basicOverlay({
+      content : '#image',
+      before: function(el, callback){
+         el.addClass('animated tada');
+         callback();
+      },
+      after: function(el){         
+         var content = '<div class="hide overlay-close">ESC or click to close</div>';
+         setTimeout(function(){
+            el.removeClass('tada').append(content).find('.hide').fadeIn();         
+         }, 1200);         
+      }
+   });</script>
+  </body>
+</html>

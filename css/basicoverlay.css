@@ -1,0 +1,127 @@
+html, body{
+   font-family: 'Droid Sans', sans-serif;
+   font-size: 13px;
+   color: #444;
+}
+ol, ul{
+   list-style-position: inside;
+   margin-left: 0px;
+}
+.navbar .nav > li > a {   color: #ccc;}
+
+.tit, h1, h2, h3, h4{
+   font-weight: normal;
+   font-family: 'Oswald', sans-serif;
+}
+
+.tit{   text-transform: uppercase;}
+.sectionTit{padding-top: 60px; position: relative; top:-40px; margin-bottom: -30px; text-transform: uppercase;}
+a{
+   color: #f27600;
+}
+h1{
+   margin-top: 80px;
+   color: #f27600;
+}
+
+h3{
+   color: #454545;
+   font-size: 22px;
+   line-height: 1.2;
+   margin-bottom: 12px;
+}
+h4{
+   color: #ccc;
+   font-size: 18px;
+   margin-bottom: 30px;
+}
+
+#features{
+   margin-bottom: 50px;
+}
+
+code{
+   color: #666;
+   padding: 1px 4px;
+white-space: nowrap;
+}
+.popover pre, 
+.popover code{
+   white-space: pre;
+   line-height: 1;
+   overflow: auto;
+   background-color: #f2f2f2;
+   border:none;
+   margin:0;
+}
+.popover code{
+   background-color: #fff;
+   white-space: pre;
+   color: #666;
+}
+.basicStyle{
+   background-color: #fff;
+   padding: 30px;
+   border: 10px solid #ddd;
+   width: 50%;   
+   display: none;
+   text-align: left;
+}
+.shadowed{ 
+   border:none;
+   -webkit-box-shadow: 0px 0px 20px #ccc;
+   -moz-box-shadow: 0px 0px 20px #ccc;
+   box-shadow: 0px 0px 20px #ccc;
+}
+
+.button{
+   font-size: 26px;
+   font-weight: bold;
+   position: absolute;
+   top:5px;
+   right:5px;
+   cursor: pointer;
+}
+.affix {
+   position: fixed; 
+   top: 52px; 
+}
+th{
+   white-space: nowrap;
+}
+.popover-title{
+   display: none;
+}
+.popover{
+   width: 500px;
+}
+#image{
+   display: none;
+   width: 250px;
+}
+.hide{
+   color: #fff;
+   display: none;}
+
+
+
+.animated{-webkit-animation-duration:1s;-moz-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both}
+
+@-webkit-keyframes flipInX{
+   0%{
+      -webkit-transform:perspective(400px) rotateX(90deg);
+      opacity:0
+   }
+   40%{
+      -webkit-transform:perspective(400px) rotateX(-10deg)      
+   }
+   70%{
+      -webkit-transform:perspective(400px) rotateX(10deg)
+   }
+   100%{
+      -webkit-transform:perspective(400px) rotateX(0deg);
+      opacity:1
+   }
+}@-moz-keyframes flipInX{0%{-moz-transform:perspective(400px) rotateX(90deg);opacity:0}40%{-moz-transform:perspective(400px) rotateX(-10deg)}70%{-moz-transform:perspective(400px) rotateX(10deg)}100%{-moz-transform:perspective(400px) rotateX(0deg);opacity:1}}@-o-keyframes flipInX{0%{-o-transform:perspective(400px) rotateX(90deg);opacity:0}40%{-o-transform:perspective(400px) rotateX(-10deg)}70%{-o-transform:perspective(400px) rotateX(10deg)}100%{-o-transform:perspective(400px) rotateX(0deg);opacity:1}}@keyframes flipInX{0%{transform:perspective(400px) rotateX(90deg);opacity:0}40%{transform:perspective(400px) rotateX(-10deg)}70%{transform:perspective(400px) rotateX(10deg)}100%{transform:perspective(400px) rotateX(0deg);opacity:1}}.flipInX{-webkit-backface-visibility:visible!important;-webkit-animation-name:flipInX;-moz-backface-visibility:visible!important;-moz-animation-name:flipInX;-o-backface-visibility:visible!important;-o-animation-name:flipInX;backface-visibility:visible!important;animation-name:flipInX}
+
+@-webkit-keyframes tada{0%{-webkit-transform:scale(1)}10%,20%{-webkit-transform:scale(0.9) rotate(-3deg)}30%,50%,70%,90%{-webkit-transform:scale(1.1) rotate(3deg)}40%,60%,80%{-webkit-transform:scale(1.1) rotate(-3deg)}100%{-webkit-transform:scale(1) rotate(0)}}@-moz-keyframes tada{0%{-moz-transform:scale(1)}10%,20%{-moz-transform:scale(0.9) rotate(-3deg)}30%,50%,70%,90%{-moz-transform:scale(1.1) rotate(3deg)}40%,60%,80%{-moz-transform:scale(1.1) rotate(-3deg)}100%{-moz-transform:scale(1) rotate(0)}}@-o-keyframes tada{0%{-o-transform:scale(1)}10%,20%{-o-transform:scale(0.9) rotate(-3deg)}30%,50%,70%,90%{-o-transform:scale(1.1) rotate(3deg)}40%,60%,80%{-o-transform:scale(1.1) rotate(-3deg)}100%{-o-transform:scale(1) rotate(0)}}@keyframes tada{0%{transform:scale(1)}10%,20%{transform:scale(0.9) rotate(-3deg)}30%,50%,70%,90%{transform:scale(1.1) rotate(3deg)}40%,60%,80%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}.tada{-webkit-animation-name:tada;-moz-animation-name:tada;-o-animation-name:tada;animation-name:tada}
